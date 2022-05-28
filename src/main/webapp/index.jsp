@@ -55,8 +55,8 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" action="/home">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="findName">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
@@ -65,10 +65,9 @@
     </div>
     <div class="row mt-2">
         <div class="col-3 text-center">
-
-            <h2 class="mb-3">Danh sách Lớp</h2>
+            <h2 class="mb-3"><a href="/home">Danh sách Lớp</a></h2>
             <c:forEach items="${classes}" var="cl">
-                <h5><a href="">${cl.name}</a></h5>
+                <h5><a href="/home?classId=${cl.id}">${cl.name}</a></h5>
             </c:forEach>
         </div>
         <div class="col-9">
@@ -95,7 +94,6 @@
                                 <input type="hidden" name="act" value="delete">
                                 <input type="hidden" name="id" value="${st.id}">
                                 <a class="btn btn-danger" onclick="xacNhanDelete(${st.id})">Xoá</a>
-                                <button class="btn btn-danger">Xoá</button>
                             </form>
                         </td>
                     </tr>
@@ -109,8 +107,6 @@
     function xacNhanDelete(id) {
         if (confirm("Bạn có chắc muốn xoá?")) {
             document.getElementById("delete"+id).submit();
-        } else {
-            alert("OK");
         }
     }
 </script>

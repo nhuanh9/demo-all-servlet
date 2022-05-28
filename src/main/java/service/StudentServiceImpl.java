@@ -91,4 +91,46 @@ public class StudentServiceImpl implements StudentService {
         }
         return false;
     }
+
+    @Override
+    public List<Student> findAllByClass(int classId) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where classId = ?");) {
+            preparedStatement.setInt(1,classId);
+            System.out.println(preparedStatement); //in ra câu truy vấn.
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int age = rs.getInt("age");
+                String name = rs.getString("name");
+                int clazzId = rs.getInt("classId"); // lấy ra classId từ bảng student trong db
+                Class clazz = classService.findById(clazzId); // từ classId vừa lấy được, dùng ClassService để tìm đối tượng class tương ứng
+                students.add(new Student(id, name, clazz, age)); //thêm đối tượng là danh sách
+            }
+        } catch (SQLException e) {
+        }
+        return students;
+    }
+
+    @Override
+    public List<Student> findAllByNameContains(String findName) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where name like ?");) {
+            preparedStatement.setString(1,"%"+findName+"%");
+            System.out.println(preparedStatement); //in ra câu truy vấn.
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int age = rs.getInt("age");
+                String name = rs.getString("name");
+                int clazzId = rs.getInt("classId"); // lấy ra classId từ bảng student trong db
+                Class clazz = classService.findById(clazzId); // từ classId vừa lấy được, dùng ClassService để tìm đối tượng class tương ứng
+                students.add(new Student(id, name, clazz, age)); //thêm đối tượng là danh sách
+            }
+        } catch (SQLException e) {
+        }
+        return students;
+    }
 }
