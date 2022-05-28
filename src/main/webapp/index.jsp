@@ -90,7 +90,7 @@
                         <td>
                             <a class="btn btn-Primary" href="/students?act=view&id=${st.id}">View</a>
                             <a class="btn btn-secondary">Sửa</a>
-                            <form action="/students" method="post" id="delete${st.id}">
+                            <form action="/students" method="post" id="delete${st.id}" style="display: inline">
                                 <input type="hidden" name="act" value="delete">
                                 <input type="hidden" name="id" value="${st.id}">
                                 <a class="btn btn-danger" onclick="xacNhanDelete(${st.id})">Xoá</a>

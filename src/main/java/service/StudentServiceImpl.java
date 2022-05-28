@@ -97,7 +97,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from student where classId = ?");) {
-            preparedStatement.setInt(1,classId);
+            preparedStatement.setInt(1, classId);
             System.out.println(preparedStatement); //in ra câu truy vấn.
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -118,7 +118,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from student where name like ?");) {
-            preparedStatement.setString(1,"%"+findName+"%");
+            preparedStatement.setString(1, "%" + findName + "%");
             System.out.println(preparedStatement); //in ra câu truy vấn.
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
